@@ -88,8 +88,8 @@ RUN set -ex \
 		--enable-integer-datetimes \
 		--enable-thread-safety \
 		--enable-tap-tests \
-# skip debugging info -- we want tiny size instead
-#		--enable-debug \
+		--enable-debug \
+		--enable-cassert \
 		--disable-rpath \
 		--with-uuid=e2fs \
 		--with-gnu-ld \
@@ -111,6 +111,7 @@ RUN set -ex \
 		--with-libxml \
 		--with-libxslt \
 		--with-icu \
+		CFLAGS="-ggdb -Og -g3 -fno-omit-frame-pointer" \
 	&& make -j "$(nproc)" world \
 	&& make install-world \
 	&& make -C contrib install \
